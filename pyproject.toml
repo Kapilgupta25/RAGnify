@@ -11,6 +11,14 @@ dependencies = [
     "pypdf>=6.10.0",
     "pymupdf>=1.27.2.2",
     "ipykernel>=7.2.0",
+    "sentence-transformers>=5.4.1",
+    "faiss-cpu>=1.13.2",
+    "chromadb>=1.5.7",
+    "langchain-text-splitters>=1.1.1",
+    "transformers>=5.5.4",
+    "torch>=2.11.0",
+    "numpy>=2.2.6",
+    "scikit-learn>=1.7.2",
 ]
 
 [build-system]
