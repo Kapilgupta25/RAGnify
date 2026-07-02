@@ -6,7 +6,10 @@ pymupdf
 sentence-transformers
 faiss-cpu
 chromadb
-
+python-dotenv              
+langchain-groq
+numpy
+scikit-learn
 
 # langchain
 # langchain-core

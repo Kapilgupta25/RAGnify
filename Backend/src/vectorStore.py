@@ -1,5 +1,6 @@
 import os
 import faiss
+from pathlib import Path
 import numpy as np
 import pickle
 from typing import List, Any
@@ -8,8 +9,9 @@ from src.embedding import EmbeddingPipeline
 
 class FaissVectorStore:
     def __init__(self, persist_dir: str = "faiss_store", embedding_model: str = "all-MiniLM-L6-v2", chunk_size: int = 1000, chunk_overlap: int = 200):
-        self.persist_dir = persist_dir
-        os.makedirs(self.persist_dir, exist_ok=True)
+        BACKEND_DIR = Path(__file__).resolve().parent.parent
+        self.persist_dir = BACKEND_DIR / "faiss_store"
+        self.persist_dir.mkdir(parents=True, exist_ok=True)
         self.index = None
         self.metadata = []
         self.embedding_model = embedding_model
@@ -66,11 +68,12 @@ class FaissVectorStore:
         query_emb = self.model.encode([query_text]).astype('float32')
         return self.search(query_emb, top_k=top_k)
 
-# # Example usage
-# if __name__ == "__main__":
-#     from data_loader import load_all_documents
-#     docs = load_all_documents("data")
-#     store = FaissVectorStore("faiss_store")
-#     store.build_from_documents(docs)
-#     store.load()
-#     print(store.query("What is Kernel?", top_k=3))
+# Example usage
+if __name__ == "__main__":
+    from data_loader import load_all_documents
+    docs = load_all_documents("data")
+    store = FaissVectorStore("faiss_store")
+    store.build_from_documents(docs)
+    store.load()
+    print(store.query("What is Kernel?", top_k=3))
+    

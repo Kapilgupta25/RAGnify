@@ -3,7 +3,8 @@ from dotenv import load_dotenv
 from src.vectorStore import FaissVectorStore
 from langchain_groq import ChatGroq
 
-load_dotenv()
+from pathlib import Path
+load_dotenv(Path(__file__).resolve().parent.parent / ".env")
 
 class RAGSearch:
     def __init__(self, persist_dir: str = "faiss_store", embedding_model: str = "all-MiniLM-L6-v2", llm_model: str = "llama-3.1-8b-instant"):
